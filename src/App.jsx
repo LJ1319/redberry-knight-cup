@@ -1,8 +1,13 @@
+import { Routes, Route } from 'react-router-dom';
+import HomePage from './pages/HomePage';
+import Registration from './pages/RegistrationPage';
+
 function App() {
   return (
-    <div>
-      <h1>Redberry Knight Cup</h1>
-    </div>
+    <Routes>
+      <Route path='/' element={<HomePage />} />
+      <Route path='/registration' element={<Registration />} />
+    </Routes>
   );
 }
 
