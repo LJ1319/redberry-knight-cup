@@ -1,11 +1,8 @@
-import Header from '../img/Header.svg';
-import Personal from '../img/Personal.svg';
-
 const Registration = () => {
 
   return (
     <div>
-
+      <h1>Registration Form</h1>
     </div>
   );
 };
