@@ -15,9 +15,14 @@ module.exports = {
         }],
       },
       colors: {
-        redberry: '#FD5334',
-        button: '#212529'
+        redberryred: '#FD5334',
+        redberryblack: '#212529',
+        redberrypurple: '#C2A5F9',
+        redberrygrey: 'rgba(185, 180, 196, 0.3)'
       },
+      height: {
+        22: '84px'
+      }
     },
   },
   plugins: [],
