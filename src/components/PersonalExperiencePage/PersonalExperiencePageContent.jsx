@@ -5,6 +5,8 @@ import PersonalExperienceForm from './PersonalExperienceForm';
 
 import Personal from '../../img/Personal.svg';
 import Header from '../Layout/Header';
+import ProgressBar from '../Layout/ProgressBar';
+import Title from '../Layout/Title';
 
 const PersonalExperiencePageContent = () => {
   return (
@@ -12,6 +14,8 @@ const PersonalExperiencePageContent = () => {
       <LeftSide cover={Personal} />
       <div className='w-1/2'>
         <Header text='start creating your account' />
+        <ProgressBar />
+        <Title />
         <PersonalExperienceForm />
       </div>
     </div>
