@@ -156,7 +156,6 @@ const PersonalExperienceForm = () => {
               ref={emailInputRef}
             />
           </div>
-
         }
 
 
@@ -205,7 +204,6 @@ const PersonalExperienceForm = () => {
               ref={phoneNumberInputRef}
             />
           </div>
-
         }
 
         <div className="flex">

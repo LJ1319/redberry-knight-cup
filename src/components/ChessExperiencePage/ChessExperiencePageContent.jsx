@@ -31,7 +31,7 @@ const ChessExperiencePageContent = () => {
             </button>
           </Link>
 
-          <Link to='/'>
+          <Link to='/complete'>
             <button
               className='w-24 h-14 border-2 border-black rounded-xl font-opensans bg-redberryblack text-white hover:border-redberrypurple hover:border-4'
               onClick={test}>

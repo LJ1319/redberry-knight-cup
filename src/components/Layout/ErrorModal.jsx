@@ -1,8 +1,6 @@
 import Error from '../../img/error.svg';
 
 const ErrorModal = ({ error }) => {
-
-
   return (
     <div className='flex-column w-96 h-28 absolute left-[1500px] top-[220px] border-2 rounded'>
       <div className='flex w-full h-5 m-2 text-center'>
@@ -17,12 +15,8 @@ const ErrorModal = ({ error }) => {
           Please enter valid data
         </span>
       </div>
-
     </div>
   );
-
-
-
 };
 
 export default ErrorModal;
