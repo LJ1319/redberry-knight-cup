@@ -17,6 +17,7 @@ module.exports = {
       colors: {
         redberryred: '#FD5334',
         redberrylightred: '#DC3545',
+        redberrypalered: '#FFEFEF',
         redberryblack: '#212529',
         redberrypurple: '#C2A5F9',
         redberrygrey: 'rgba(185, 180, 196, 0.3)',
