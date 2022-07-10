@@ -25,7 +25,8 @@ module.exports = {
         redberrydarksilver: '#95939A',
         redberrywhite: '#F8F9FA',
         redberrygreysh: '#E9ECEF',
-        redberrypale: 'rgba(33, 37, 41, 0.5)'
+        redberrypale: 'rgba(33, 37, 41, 0.5)',
+        redberrygreen: '#E9FAF1'
       },
       height: {
         22: '84px'

@@ -18,11 +18,11 @@ const StartingPageContent = () => {
           </h1>
         </div>
         <div className='ml-20 mt-20 w-48 h-14'>
-          <button className='hover:border-4 hover:rounded-xl hover:border-redberrypurple'>
-            <Link to='/personal-experience'>
+          <Link to='/personal-experience'>
+            <button className='hover:border-4 hover:rounded-xl hover:border-redberrypurple'>
               <img src={GetStarted} alt="Get Started Right Arrow" />
-            </Link>
-          </button>
+            </button>
+          </Link>
         </div>
       </div>
     </div>

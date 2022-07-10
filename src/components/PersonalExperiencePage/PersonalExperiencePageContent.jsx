@@ -15,16 +15,21 @@ const PersonalExperiencePageContent = () => {
       <LeftSide cover={Personal} />
       <div className='w-1/2'>
         <Header text='start creating your account' />
-        <ProgressBar />
-        <Title />
+        <ProgressBar text={1} />
+        <Title title='Personal Information' info='this is basic information fields' />
         <PersonalExperienceForm />
-        <div className='flex justify-between ml-20 mt-20 max-w-2xl h-14'>
-          <button className='w-20 border-2 border-black rounded-xl hover:border-redberrypurple hover:bg-redberrygrey'>Back</button>
-          <button>
-            <Link to='/chess-experience'>
-              <img src={Next} alt="Get Started Right Arrow" className='hover:border-4 hover:rounded-xl hover:border-redberrypurple' />
-            </Link>
-          </button>
+        <div className='flex justify-between ml-20 mt-20 max-w-2xl '>
+          <Link to='/'>
+            <button className='w-24 h-14 border-2 border-black rounded-xl hover:border-redberrypurple hover:bg-redberrygrey'>
+              Back
+            </button>
+          </Link>
+
+          <Link to='/chess-experience'>
+            <button>
+              <img src={Next} alt="Get Started Right Arrow" className='hover:h-14 hover:border-4 hover:rounded-xl hover:border-redberrypurple' />
+            </button>
+          </Link>
         </div>
       </div>
     </div>
