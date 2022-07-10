@@ -24,7 +24,7 @@ const ProgressBar = ({ content, text }) => {
           <span className="text-lg text-redberrydarksilver font-opensans font-bold">2</span>
         </div>}
 
-        {location.pathname === '/chess-experience' && <div className="w-10 h-10 border rounded-lg text-center p-1">
+        {location.pathname === '/chess-experience' && <div className="w-10 h-10 bg-redberrygreen rounded-lg text-center p-1">
           <span className="text-lg font-opensans font-bold">2</span>
         </div>}
 
