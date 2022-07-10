@@ -1,3 +1,5 @@
+import { useLocalStorage } from "../../useLocalStorage";
+
 import { useRef, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 
@@ -6,14 +8,21 @@ import Next from '../../img/next-button.svg';
 
 const PersonalExperienceForm = () => {
 
+  const [name, setName] = useLocalStorage('name', '');
+  const [email, setEmail] = useLocalStorage('email', '');
+  const [phoneNumber, setPhoneNumber] = useLocalStorage('phone', '');
+  const [birthDate, setBirthDate] = useLocalStorage('date_of_birth', '');
+
+
+  const [isValid, setIsValid] = useState(false);
+
   const nameInputRef = useRef();
   const emailInputRef = useRef();
   const phoneNumberInputRef = useRef();
   const birthDateInputRef = useRef();
 
-  const [isValid, setIsValid] = useState(false);
-
   const validate = () => {
+
 
     let validName = nameInputRef.current.value.length > 2;
     let validEmail = emailInputRef.current.value.split('@')[1] === 'redberry.ge';
@@ -29,18 +38,22 @@ const PersonalExperienceForm = () => {
 
   };
 
+
   const submitHandler = (event) => {
     event.preventDefault();
 
-    const enteredName = nameInputRef.current.value;
-    const enteredEmail = emailInputRef.current.value;
-    const enteredPhoneNumber = phoneNumberInputRef.current.value;
-    const enteredBirthDate = birthDateInputRef.current.value;
 
-    localStorage.setItem('name', enteredName);
-    localStorage.setItem('email', enteredEmail);
-    localStorage.setItem('phone', enteredPhoneNumber);
-    localStorage.setItem('date_of_birth', enteredBirthDate);
+    // const enteredName = nameInputRef.current.value;
+    // const enteredEmail = emailInputRef.current.value;
+    // const enteredPhoneNumber = phoneNumberInputRef.current.value;
+    // const enteredBirthDate = birthDateInputRef.current.value;
+
+
+
+    // localStorage.setItem('name', enteredName);
+    // localStorage.setItem('email', enteredEmail);
+    // localStorage.setItem('phone', enteredPhoneNumber);
+    // localStorage.setItem('date_of_birth', enteredBirthDate);
 
 
     // console.log(`from personal page ${enteredName} ${enteredEmail} ${enteredPhoneNumber} ${enteredBirthDate}`);
@@ -57,6 +70,8 @@ const PersonalExperienceForm = () => {
           id="name"
           required
           placeholder="Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
           ref={nameInputRef}
         />
         <input
@@ -65,6 +80,8 @@ const PersonalExperienceForm = () => {
           id="email"
           required
           placeholder="Email address"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
           ref={emailInputRef}
         />
         <input
@@ -73,6 +90,8 @@ const PersonalExperienceForm = () => {
           id="phone"
           required
           placeholder="Phone number"
+          value={phoneNumber}
+          onChange={(e) => setPhoneNumber(e.target.value)}
           ref={phoneNumberInputRef}
         />
         <input
@@ -81,6 +100,8 @@ const PersonalExperienceForm = () => {
           id="date"
           required
           placeholder="Date of birth"
+          value={birthDate}
+          onChange={(e) => setBirthDate(e.target.value)}
           ref={birthDateInputRef}
         />
         <div className='flex justify-between mt-20 max-w-2xl '>
