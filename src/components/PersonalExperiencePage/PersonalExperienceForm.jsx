@@ -18,7 +18,7 @@ const PersonalExperienceForm = () => {
   const [isValidName, setIsValidName] = useLocalStorage('isValidName', 'not_filled');
   const [isValidEmail, setIsValidEmail] = useLocalStorage('isValidEmail', 'not_filled');
   const [isValidPhoneNumber, setIsValidPhoneNumber] = useLocalStorage('isValidPhoneNumber', 'not_filled');
-  const [isValid, setIsValid] = useState();
+  const [isValid, setIsValid] = useState('');
 
   const nameInputRef = useRef();
   const emailInputRef = useRef();
@@ -53,6 +53,8 @@ const PersonalExperienceForm = () => {
 
     if (validName && validEmail && validPhoneNumber) {
       setIsValid(true);
+    } else {
+      setIsValid(false);
     }
   };
 
@@ -220,11 +222,9 @@ const PersonalExperienceForm = () => {
           {birthDate && <img src={Correct} alt='valid' className="relative left-3" />}
         </div>
 
-        {!isValid && < ErrorModal
-
-          error='Invalid name, email or/and phone number'
-
-        />}
+        {isValid === false &&
+          <ErrorModal error='Invalid name, email or/and phone number' />
+        }
 
         <div className='flex justify-between mt-20 max-w-2xl '>
           <Link to='/'>
