@@ -10,6 +10,11 @@ import Title from '../Layout/Title';
 import Next from '../../img/next-button.svg';
 
 const PersonalExperiencePageContent = () => {
+
+  const test = () => {
+    console.log('from personal page');
+  };
+
   return (
     <div className="flex">
       <LeftSide cover={Personal} />
@@ -26,7 +31,7 @@ const PersonalExperiencePageContent = () => {
           </Link>
 
           <Link to='/chess-experience'>
-            <button>
+            <button onClick={test}>
               <img src={Next} alt="Get Started Right Arrow" className='hover:h-14 hover:border-4 hover:rounded-xl hover:border-redberrypurple' />
             </button>
           </Link>
