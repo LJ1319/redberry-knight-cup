@@ -37,9 +37,13 @@ const PersonalExperienceForm = () => {
     const enteredPhoneNumber = phoneNumberInputRef.current.value;
     const enteredBirthDate = birthDateInputRef.current.value;
 
+    localStorage.setItem('name', enteredName);
+    localStorage.setItem('email', enteredEmail);
+    localStorage.setItem('phone', enteredPhoneNumber);
+    localStorage.setItem('date_of_birth', enteredBirthDate);
 
-    console.log(`from personal page ${enteredName} ${enteredEmail} ${enteredPhoneNumber} ${enteredBirthDate}`);
 
+    // console.log(`from personal page ${enteredName} ${enteredEmail} ${enteredPhoneNumber} ${enteredBirthDate}`);
 
   };
 
@@ -86,9 +90,7 @@ const PersonalExperienceForm = () => {
             </button>
           </Link>
 
-          {isValid && (
-            <Navigate to='/chess-experience' />
-          )}
+          {isValid && (<Navigate to='/chess-experience' />)}
           <button onClick={validate}>
             <img src={Next} alt="Get Started Right Arrow" className='hover:h-14 hover:border-4 hover:rounded-xl hover:border-redberrypurple' />
           </button>
