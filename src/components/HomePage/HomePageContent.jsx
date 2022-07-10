@@ -18,7 +18,7 @@ const StartingPageContent = () => {
           </h1>
         </div>
         <div className='ml-20 mt-20 w-48 h-14'>
-          <button className='hover:border-4 rounded-xl border-redberrypurple'>
+          <button className='hover:border-4 hover:rounded-xl hover:border-redberrypurple'>
             <Link to='/personal-experience'>
               <img src={GetStarted} alt="Get Started Right Arrow" />
             </Link>
