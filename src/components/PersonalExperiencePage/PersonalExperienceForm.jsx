@@ -5,6 +5,7 @@ import { Link, Navigate } from "react-router-dom";
 
 import Correct from '../../img/correct.svg';
 import Next from '../../img/next-button.svg';
+import ErrorModal from "../Layout/ErrorModal";
 
 
 const PersonalExperienceForm = () => {
@@ -220,6 +221,12 @@ const PersonalExperienceForm = () => {
           />
           {birthDate && <img src={Correct} alt='valid' className="relative left-3" />}
         </div>
+
+        {!isValid && < ErrorModal
+
+          error='Invalid name, email or/and phone number'
+
+        />}
 
         <div className='flex justify-between mt-20 max-w-2xl '>
           <Link to='/'>
