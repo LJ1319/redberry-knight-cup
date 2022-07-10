@@ -14,9 +14,9 @@ const PersonalExperienceForm = () => {
   const [phoneNumber, setPhoneNumber] = useLocalStorage('phone', '');
   const [birthDate, setBirthDate] = useLocalStorage('date_of_birth', '');
 
-  const [isValidName, setIsValidName] = useLocalStorage('isValidName');
-  const [isValidEmail, setIsValidEmail] = useLocalStorage('isValidEmail');
-  const [isValidPhoneNumber, setIsValidPhoneNumber] = useLocalStorage('isValidPhoneNumber');
+  const [isValidName, setIsValidName] = useLocalStorage('isValidName', 'not_filled');
+  const [isValidEmail, setIsValidEmail] = useLocalStorage('isValidEmail', 'not_filled');
+  const [isValidPhoneNumber, setIsValidPhoneNumber] = useLocalStorage('isValidPhoneNumber', 'not_filled');
   const [isValid, setIsValid] = useState();
 
   const nameInputRef = useRef();
@@ -64,10 +64,25 @@ const PersonalExperienceForm = () => {
     <div className="flex ml-16 mt-12">
       <form className="w-full max-w-2xl" onSubmit={submitHandler}>
 
-        {isValidName &&
+        {isValidName === 'not_filled' &&
           <div className="flex">
             <input
-              className="w-full h-12 5my-5 p-5 text-xl border-b rounded-lg placeholder:text-redberryblack placeholder:hover:text-redberrypale hover:bg-redberrywhite  focus:bg-redberrygreysh outline-none placeholder:focus:text-redberryblack"
+              className="w-full h-12 my-5 p-5 text-xl border-b rounded-lg placeholder:text-redberryblack placeholder:hover:text-redberrypale hover:bg-redberrywhite  focus:bg-redberrygreysh outline-none placeholder:focus:text-redberryblack"
+              type="text"
+              id="name"
+              required
+              placeholder="Name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              ref={nameInputRef}
+            />
+          </div>
+        }
+
+        {isValidName === true &&
+          <div className="flex">
+            <input
+              className="w-full h-12 my-5 p-5 text-xl border-b rounded-lg placeholder:text-redberryblack placeholder:hover:text-redberrypale hover:bg-redberrywhite  focus:bg-redberrygreysh outline-none placeholder:focus:text-redberryblack"
               type="text"
               id="name"
               required
@@ -80,11 +95,10 @@ const PersonalExperienceForm = () => {
           </div>
         }
 
-
-        {!isValidName &&
+        {isValidName === false &&
           <div className="flex">
             <input
-              className="w-full h-12 5my-5 p-5 text-xl border-b rounded-lg placeholder:text-redberryblack placeholder:hover:text-redberrypale outline-none "
+              className="w-full h-12 my-5 p-5 text-xl border-b rounded-lg bg-redberrypalered text-redberrylightred outline-none "
               type="text"
               id="name"
               required
@@ -96,34 +110,102 @@ const PersonalExperienceForm = () => {
           </div>
         }
 
+        {isValidEmail === 'not_filled' &&
+          <div className="flex">
+            <input
+              className="w-full h-12 my-5 p-5 text-xl border-b rounded-lg placeholder:text-redberryblack placeholder:hover:text-redberrypale hover:bg-redberrywhite  focus:bg-redberrygreysh outline-none placeholder:focus:text-redberryblack"
+              type="email"
+              id="email"
+              required
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              ref={emailInputRef}
+            />
+          </div>
+        }
 
-        <div className="flex">
-          <input
-            className="w-full h-12 my-5 p-5 text-xl border-b rounded-lg placeholder:text-redberryblack placeholder:hover:text-redberrypale hover:bg-redberrywhite  focus:bg-redberrygreysh outline-none placeholder:focus:text-redberryblack"
-            type="email"
-            id="email"
-            required
-            placeholder="Email address"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            ref={emailInputRef}
-          />
-          {isValidEmail && <img src={Correct} alt="valid" className="relative right-7" />}
-        </div>
+        {isValidEmail === true &&
+          <div className="flex">
+            <input
+              className="w-full h-12 my-5 p-5 text-xl border-b rounded-lg placeholder:text-redberryblack placeholder:hover:text-redberrypale hover:bg-redberrywhite  focus:bg-redberrygreysh outline-none placeholder:focus:text-redberryblack"
+              type="email"
+              id="email"
+              required
+              placeholder="Email address"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              ref={emailInputRef}
+            />
+            <img src={Correct} alt="valid" className="relative right-7" />
+          </div>
 
-        <div className="flex">
-          <input
-            className="w-full h-12 my-5 p-5 text-xl border-b rounded-lg placeholder:text-redberryblack placeholder:hover:text-redberrypale hover:bg-redberrywhite  focus:bg-redberrygreysh outline-none placeholder:focus:text-redberryblack"
-            type="text"
-            id="phone"
-            required
-            placeholder="Phone number"
-            value={phoneNumber}
-            onChange={(e) => setPhoneNumber(e.target.value)}
-            ref={phoneNumberInputRef}
-          />
-          {isValidPhoneNumber && <img src={Correct} alt='valid' className="relative right-7" />}
-        </div>
+        }
+
+        {isValidEmail === false &&
+          <div className="flex">
+            <input
+              className="w-full h-12 my-5 p-5 text-xl border-b rounded-lg bg-redberrypalered text-redberrylightred outline-none"
+              type="email"
+              id="email"
+              required
+              placeholder="Email address"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              ref={emailInputRef}
+            />
+          </div>
+
+        }
+
+
+        {isValidPhoneNumber === 'not_filled' &&
+          <div className="flex">
+            <input
+              className="w-full h-12 my-5 p-5 text-xl border-b rounded-lg placeholder:text-redberryblack placeholder:hover:text-redberrypale hover:bg-redberrywhite  focus:bg-redberrygreysh outline-none placeholder:focus:text-redberryblack"
+              type="text"
+              id="phone"
+              required
+              placeholder="Phone number"
+              value={phoneNumber}
+              onChange={(e) => setPhoneNumber(e.target.value)}
+              ref={phoneNumberInputRef}
+            />
+          </div>
+        }
+
+        {isValidPhoneNumber === true &&
+          <div className="flex">
+            <input
+              className="w-full h-12 my-5 p-5 text-xl border-b rounded-lg placeholder:text-redberryblack placeholder:hover:text-redberrypale hover:bg-redberrywhite  focus:bg-redberrygreysh outline-none placeholder:focus:text-redberryblack"
+              type="text"
+              id="phone"
+              required
+              placeholder="Phone number"
+              value={phoneNumber}
+              onChange={(e) => setPhoneNumber(e.target.value)}
+              ref={phoneNumberInputRef}
+            />
+            <img src={Correct} alt="valid" className="relative right-7" />
+          </div>
+
+        }
+
+        {isValidPhoneNumber === false &&
+          <div className="flex">
+            <input
+              className="w-full h-12 my-5 p-5 text-xl border-b rounded-lg bg-redberrypalered text-redberrylightred outline-none "
+              type="text"
+              id="phone"
+              required
+              placeholder="Phone number"
+              value={phoneNumber}
+              onChange={(e) => setPhoneNumber(e.target.value)}
+              ref={phoneNumberInputRef}
+            />
+          </div>
+
+        }
 
         <div className="flex">
           <input
@@ -152,8 +234,8 @@ const PersonalExperienceForm = () => {
           </button>
         </div>
 
-      </form>
-    </div>
+      </form >
+    </div >
   );
 };
 
