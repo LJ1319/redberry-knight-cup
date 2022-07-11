@@ -237,6 +237,7 @@ const PersonalExperienceForm = () => {
           <button onClick={validate}>
             <img src={Next} alt="Get Started Right Arrow" className='hover:h-14 hover:border-4 hover:rounded-xl hover:border-redberrypurple' />
           </button>
+
         </div>
 
       </form >

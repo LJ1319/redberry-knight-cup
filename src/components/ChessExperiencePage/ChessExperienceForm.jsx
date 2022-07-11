@@ -1,25 +1,26 @@
-import { useRef, useState, useEffect } from 'react';
+import { Fragment, useState, useEffect } from 'react';
 
 import { Link } from 'react-router-dom';
 import axios from "axios";
 
+import { useLocalStorage } from '../../useLocalStorage';
+
+import { Listbox, Transition } from '@headlessui/react';
 
 import Down from '../../img/chevron-down.svg';
 import Up from '../../img/chevron-up.svg';
-import { useLocalStorage } from '../../useLocalStorage';
 
 const API_URL = 'https://chess-tournament-api.devtest.ge/api';
 
-const levelOfKnowledge = [
-  'beginner',
-  'intermediate',
-  'professional'
-];
+function classNames(...classes) {
+  return classes.filter(Boolean).join(' ');
+}
 
 const ChessExperienceForm = () => {
 
 
   const [grandMasters, setGrandMasters] = useState([]);
+  const [selected, setSelected] = useState([...grandMasters]);
 
   const [experienceLevel, setExperienceLevel] = useLocalStorage('experience_level', '');
   const [alreadyParticipated, setAlreadyParticipated] = useLocalStorage('already_participated', '');
@@ -32,12 +33,16 @@ const ChessExperienceForm = () => {
     toggleOpenLevel(!isOpenLevel);
   };
 
-  const toggleCharacters = () => {
-    toggleOpenCharacters(!isOpenCharacters);
-  };
+  // const toggleCharacters = () => {
+  //   toggleOpenCharacters(!isOpenCharacters);
+  // };
 
   const handleChange = (e) => {
     setAlreadyParticipated(e.target.value);
+  };
+
+  const handleSelect = () => {
+
   };
 
   const submitHandler = (e) => {
@@ -46,7 +51,7 @@ const ChessExperienceForm = () => {
 
   const fetchData = async () => {
     try {
-      await axios.get(`${API_URL}/grandmasters `).then((response) => {
+      await axios.get(`${API_URL}/grandmasters`).then((response) => {
         setGrandMasters(response.data);
       });
     } catch (error) {
@@ -60,54 +65,6 @@ const ChessExperienceForm = () => {
 
 
 
-
-  // {
-  //   isOpen && (
-
-  //     grandMasters.map(grandMaster => (
-  //       <li className='flex' onClick={() => toggleOpen(false)}>
-  //         <h4 className='mr-4'>{grandMaster.name}</h4>
-  //         <img src={`https://chess-tournament-api.devtest.ge${grandMaster.image}`} className='w-12 h-12' />
-  //       </li>
-  //     ))
-
-  //   );
-  // }
-
-  //   <input
-  //               className="w-full h-12 my-5 p-5 text-xl border-b rounded-lg placeholder:text-redberryblack outline-none"
-  //               placeholder='Level of knowledge'
-  //             />
-
-  //             <button onClick={toggleLevel}>
-  // {!isOpenLevel && <img src={Down} alt="chevron down" className='relative right-6' />}
-  // {isOpenLevel && <img src={Up} alt="chevron up" className='relative right-6' />}
-  //             </button>
-  //           </div >
-
-
-
-  //   { isOpenLevel && <div className='absolute left-[1020px] top-[540px] w-96 h-52 border-2 border-black rounded'>
-  //     {levelOfKnowledge.map(level => <span className='flex'>{level}</span>)}
-  //   </div>}
-
-  // <div className="flex w-96 mt-6 ml-6">
-  //   <input
-  //     className="w-full h-12 my-5 p-5 text-xl border-b rounded-lg placeholder:text-redberryblack outline-none"
-  //     placeholder='Choose your character'
-  //   />
-
-  //   <button onClick={toggleCharacters}>
-  //     {!isOpenCharacters && <img src={Down} alt="chevron down" className='relative right-6' />}
-  //     {isOpenCharacters && <img src={Up} alt="chevron up" className='relative right-6' />}
-  //   </button>
-
-  //   {isOpenCharacters && (
-  //     <div className='absolute left-[1020px] top-[540px] w-96 h-52 border-2 border-black rounded'>
-
-  //     </div>
-  //   )}
-
   return (
 
     <div className="flex ml-16 mt-10" >
@@ -119,27 +76,87 @@ const ChessExperienceForm = () => {
               onChange={(e) => setExperienceLevel(e.target.value)}
               onClick={toggleLevel}
               className="form-select form-select-lg appearance-none w-full text-xl font-normal border-b rounded-lg transition ease-in-out pl-3 pb-3 focus:text-gray-700 focus:bg-white  focus:outline-none" >
-              <option value="beginner" >Beginner</option>
+              <option value="beginner">Beginner</option>
               <option value="intermediate" >Intermediate</option>
               <option value="professional">Professional</option>
             </select>
 
-            {!isOpenLevel && <img src={Down} alt="chevron down" className='relative  right-6' />}
+            {!isOpenLevel && <img src={Down} alt="chevron down" className='relative right-6' />}
             {isOpenLevel && <img src={Up} alt="chevron up" className='relative right-6' />}
           </div>
 
-          <div>
+          <Listbox value={selected} onChange={setSelected}>
+            {({ open }) => (
+              <>
+                <div className="mt-6 relative">
+                  <Listbox.Button className="relative w-full text-xl font-normal border-b rounded-lg transition ease-in-out pl-3 pb-3 focus:text-gray-700 focus:bg-white  focus:outline-none">
+                    <span className="flex items-center">
+                      <span>Choose Your Character</span>
+                      <span className="ml-3 block truncate">{selected.name}</span>
+                    </span>
+                    <span className="ml-3 absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+                    </span>
+                  </Listbox.Button>
 
-          </div>
+                  <Transition
+                    show={open}
+                    as={Fragment}
+                    leave="transition ease-in duration-100"
+                    leaveFrom="opacity-100"
+                    leaveTo="opacity-0"
+                  >
+                    <Listbox.Options className="absolute z-10 mt-1 w-full bg-white shadow-lg max-h-56 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm">
+                      {grandMasters.map((grandMaster) => (
+                        <Listbox.Option
+                          key={grandMaster.id}
+                          className={({ active }) =>
+                            classNames(
+                              active ? 'text-white bg-indigo-600' : 'text-gray-900',
+                              'cursor-default select-none relative py-2 pl-3 pr-9'
+                            )
+                          }
+                          value={grandMaster}
+                        >
+                          {({ selected, active }) => (
+                            <>
+                              <div className="flex items-center">
+                                <span
+                                  className={classNames(selected ? 'font-semibold' : 'font-normal', 'ml-3 block truncate')}
+                                >
+                                  {grandMaster.name}
+                                </span>
+                                <img src={`https://chess-tournament-api.devtest.get${grandMaster.image}`} alt="" className="flex-shrink-0 h-6 w-6 rounded-full" />
+                              </div>
+
+                              {selected ? (
+                                <span
+                                  className={classNames(
+                                    active ? 'text-white' : 'text-indigo-600',
+                                    'absolute inset-y-0 right-0 flex items-center pr-4'
+                                  )}
+                                >
+                                </span>
+                              ) : null}
+                            </>
+                          )}
+                        </Listbox.Option>
+                      ))}
+                    </Listbox.Options>
+                  </Transition>
+                </div>
+              </>
+            )}
+          </Listbox>
         </div>
 
-        <div className="flex mt-32">
+        <p className='mt-20 mb-4 text-lg font-opensans'>Have You Participated in the Redberry Championship?</p>
+        <div className="flex">
           <div className="form-check form-check-inline">
-            <input className="form-check-input form-check-input appearance-none rounded-full h-5 w-5 border border-gray-300 bg-white  checked:border-blue-600 checked:border-4 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="radio" name="inlineRadioOptions" id="inlineRadio1" checked={alreadyParticipated === 'yes'} value='yes' onChange={handleChange} />
+            <input className="form-check-input form-check-input appearance-none rounded-full h-6 w-6 border border-gray-300 bg-white  checked:border-blue-600 checked:border-4 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="radio" name="inlineRadioOptions" id="inlineRadio1" checked={alreadyParticipated === 'yes'} value='yes' onChange={handleChange} />
             <label className="form-check-label inline-block text-gray-800" htmlFor="inlineRadio10">Yes</label>
           </div>
           <div className="form-check form-check-inline">
-            <input className="form-check-input form-check-input appearance-none rounded-full h-5 w-5 border border-gray-300 bg-white checked:border-4 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left ml-16 mr-2 cursor-pointer" type="radio" name="inlineRadioOptions" id="inlineRadio2" checked={alreadyParticipated === 'no'} value='no' onChange={handleChange} />
+            <input className="form-check-input form-check-input appearance-none rounded-full h-6 w-6 border border-gray-300 bg-white checked:border-4 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left ml-16 mr-2 cursor-pointer" type="radio" name="inlineRadioOptions" id="inlineRadio2" checked={alreadyParticipated === 'no'} value='no' onChange={handleChange} />
             <label className="form-check-label inline-block text-gray-800" htmlFor="inlineRadio20">No</label>
           </div>
         </div>
@@ -150,6 +167,7 @@ const ChessExperienceForm = () => {
               Back
             </button>
           </Link>
+
 
           <button
             className='w-24 h-14 border-2 border-black rounded-xl font-opensans bg-redberryblack text-white hover:border-redberrypurple hover:border-4'
