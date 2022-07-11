@@ -18,9 +18,6 @@ const levelOfKnowledge = [
 
 const ChessExperienceForm = () => {
 
-  // const beginnerRef = useRef();
-  // const intermediateRef = useRef();
-  // const professionalRef = useRef();
 
   const [grandMasters, setGrandMasters] = useState([]);
 
@@ -33,18 +30,18 @@ const ChessExperienceForm = () => {
 
   const toggleLevel = () => {
     toggleOpenLevel(!isOpenLevel);
-    console.log(isOpenLevel);
   };
 
   const toggleCharacters = () => {
     toggleOpenCharacters(!isOpenCharacters);
   };
 
+  const handleChange = (e) => {
+    setAlreadyParticipated(e.target.value);
+  };
+
   const submitHandler = (e) => {
     e.preventDefault();
-
-    // const experience_level = beginnerRef.current.value;
-    // console.log(experience_level);
   };
 
   const fetchData = async () => {
@@ -113,7 +110,7 @@ const ChessExperienceForm = () => {
 
   return (
 
-    <div className="flex ml-16 mt-12" >
+    <div className="flex ml-16 mt-10" >
       <form className="w-full max-w-4xl" onSubmit={submitHandler}>
         <div className='flex'>
           <div className="flex w-96 mt-6 mr-6">
@@ -130,19 +127,24 @@ const ChessExperienceForm = () => {
             {!isOpenLevel && <img src={Down} alt="chevron down" className='relative  right-6' />}
             {isOpenLevel && <img src={Up} alt="chevron up" className='relative right-6' />}
           </div>
+
+          <div>
+
+          </div>
         </div>
 
-        <div className="form-check form-check-inline">
-          <input className="form-check-input form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" />
-          <label className="form-check-label inline-block text-gray-800" for="inlineRadio10">Yes</label>
-        </div>
-        <div className="form-check form-check-inline">
-          <input className="form-check-input form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" />
-          <label className="form-check-label inline-block text-gray-800" for="inlineRadio20">No</label>
+        <div className="flex mt-32">
+          <div className="form-check form-check-inline">
+            <input className="form-check-input form-check-input appearance-none rounded-full h-5 w-5 border border-gray-300 bg-white  checked:border-blue-600 checked:border-4 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="radio" name="inlineRadioOptions" id="inlineRadio1" checked={alreadyParticipated === 'yes'} value='yes' onChange={handleChange} />
+            <label className="form-check-label inline-block text-gray-800" htmlFor="inlineRadio10">Yes</label>
+          </div>
+          <div className="form-check form-check-inline">
+            <input className="form-check-input form-check-input appearance-none rounded-full h-5 w-5 border border-gray-300 bg-white checked:border-4 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left ml-16 mr-2 cursor-pointer" type="radio" name="inlineRadioOptions" id="inlineRadio2" checked={alreadyParticipated === 'no'} value='no' onChange={handleChange} />
+            <label className="form-check-label inline-block text-gray-800" htmlFor="inlineRadio20">No</label>
+          </div>
         </div>
 
-
-        <div className='flex justify-between mt-80 max-w-2xl'>
+        <div className='flex justify-between mt-56 max-w-2xl'>
           <Link to='/personal-experience'>
             <button className='w-24 h-14 border-2 border-black rounded-xl font-opensans hover:border-redberrypurple hover:bg-redberrygrey'>
               Back
