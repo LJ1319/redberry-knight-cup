@@ -11,6 +11,7 @@ import Down from '../../img/chevron-down.svg';
 import Up from '../../img/chevron-up.svg';
 
 const API_URL = 'https://chess-tournament-api.devtest.ge/api';
+const IMAGES_URL = 'https://chess-tournament-api.devtest.ge/';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
@@ -66,6 +67,12 @@ const ChessExperienceForm = () => {
 
 
   return (
+
+    // <>
+    //   {grandMasters.map(grandMaster => <img src={`https://chess-tournament-api.devtest.ge${grandMaster.image}`} alt="" className="flex-shrink-0 h-6 w-6 rounded-full" />)}
+
+    // </>
+
 
     <div className="flex ml-16 mt-10" >
       <form className="w-full max-w-4xl" onSubmit={submitHandler}>
@@ -125,7 +132,7 @@ const ChessExperienceForm = () => {
                                 >
                                   {grandMaster.name}
                                 </span>
-                                <img src={`https://chess-tournament-api.devtest.get${grandMaster.image}`} alt="" className="flex-shrink-0 h-6 w-6 rounded-full" />
+                                <img src={`${IMAGES_URL}${grandMaster.image}`} alt="" className="flex-shrink-0 h-6 w-6 rounded-full" />
                               </div>
 
                               {selected ? (
